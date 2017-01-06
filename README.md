@@ -54,9 +54,9 @@ OR
 AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 
 // Create items
-AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_maps_place, R.color.color_tab_1);
-AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_maps_local_bar, R.color.color_tab_2);
-AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_maps_local_restaurant, R.color.color_tab_3);
+AHBottomNavigationItem item1 = new AHBottomNavigationItem.Builder(R.string.tab_1, R.drawable.ic_maps_place).setColorRes(R.color.color_tab_1).build();
+AHBottomNavigationItem item2 = new AHBottomNavigationItem.Builder(R.string.tab_2, R.drawable.ic_maps_local_bar).setColorRes(R.color.color_tab_2).build();
+AHBottomNavigationItem item3 = new AHBottomNavigationItem.Builder(R.string.tab_3, R.drawable.ic_maps_local_restaurant).setColorRes(R.color.color_tab_3).build();
 
 // Add items
 bottomNavigation.addItem(item1);
