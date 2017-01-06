@@ -66,9 +66,18 @@ public class DemoActivity extends AppCompatActivity {
             navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
             navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
         } else {
-            AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_apps_black_24dp, R.color.color_tab_1);
-            AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_maps_local_bar, R.color.color_tab_2);
-            AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_maps_local_restaurant, R.color.color_tab_3);
+            AHBottomNavigationItem item1 =
+                    new AHBottomNavigationItem.Builder(R.string.tab_1, R.drawable.ic_apps_black_24dp)
+                            .setColorRes(R.color.color_tab_1)
+                            .build();
+            AHBottomNavigationItem item2 =
+                    new AHBottomNavigationItem.Builder(R.string.tab_2, R.drawable.ic_maps_local_bar)
+                            .setColorRes(R.color.color_tab_2)
+                            .build();
+            AHBottomNavigationItem item3 =
+                    new AHBottomNavigationItem.Builder(R.string.tab_3, R.drawable.ic_maps_local_restaurant)
+                            .setColorRes(R.color.color_tab_3)
+                            .build();
 
             bottomNavigationItems.add(item1);
             bottomNavigationItems.add(item2);
@@ -240,12 +249,14 @@ public class DemoActivity extends AppCompatActivity {
 
         } else {
             if (addItems) {
-                AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.tab_4),
-                        ContextCompat.getDrawable(this, R.drawable.ic_maps_local_bar),
-                        ContextCompat.getColor(this, R.color.color_tab_4));
-                AHBottomNavigationItem item5 = new AHBottomNavigationItem(getString(R.string.tab_5),
-                        ContextCompat.getDrawable(this, R.drawable.ic_maps_place),
-                        ContextCompat.getColor(this, R.color.color_tab_5));
+                AHBottomNavigationItem item4 =
+                        new AHBottomNavigationItem.Builder(getString(R.string.tab_4), ContextCompat.getDrawable(this, R.drawable.ic_maps_local_bar))
+                                .setColor(ContextCompat.getColor(this, R.color.color_tab_4))
+                                .build();
+                AHBottomNavigationItem item5 =
+                        new AHBottomNavigationItem.Builder(getString(R.string.tab_5), ContextCompat.getDrawable(this, R.drawable.ic_maps_place))
+                                .setColor(ContextCompat.getColor(this, R.color.color_tab_5))
+                                .build();
 
                 bottomNavigation.addItem(item4);
                 bottomNavigation.addItem(item5);

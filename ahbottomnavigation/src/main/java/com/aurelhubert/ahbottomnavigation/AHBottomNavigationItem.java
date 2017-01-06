@@ -18,18 +18,23 @@ import android.support.v4.content.ContextCompat;
 public class AHBottomNavigationItem {
 
     private String title = "";
+
     private Drawable drawable;
+
     private int color = Color.GRAY;
 
-    private
     @StringRes
-    int titleRes = 0;
-    private
+    private int titleRes = 0;
+
     @DrawableRes
-    int drawableRes = 0;
-    private
+    private int drawableRes = 0;
+
     @ColorRes
-    int colorRes = 0;
+    private int colorRes = 0;
+
+    private boolean tintDrawableActive = true;
+
+    private boolean tintDrawableInactive = true;
 
     /**
      * Constructor
@@ -37,6 +42,7 @@ public class AHBottomNavigationItem {
      * @param title    Title
      * @param resource Drawable resource
      */
+    @Deprecated
     public AHBottomNavigationItem(String title, @DrawableRes int resource) {
         this.title = title;
         this.drawableRes = resource;
@@ -61,6 +67,7 @@ public class AHBottomNavigationItem {
      * @param drawableRes Drawable resource
      * @param colorRes    Color resource
      */
+    @Deprecated
     public AHBottomNavigationItem(@StringRes int titleRes, @DrawableRes int drawableRes, @ColorRes int colorRes) {
         this.titleRes = titleRes;
         this.drawableRes = drawableRes;
@@ -73,6 +80,7 @@ public class AHBottomNavigationItem {
      * @param title    String
      * @param drawable Drawable
      */
+    @Deprecated
     public AHBottomNavigationItem(String title, Drawable drawable) {
         this.title = title;
         this.drawable = drawable;
@@ -85,10 +93,25 @@ public class AHBottomNavigationItem {
      * @param drawable Drawable
      * @param color    Color
      */
+    @Deprecated
     public AHBottomNavigationItem(String title, Drawable drawable, @ColorInt int color) {
         this.title = title;
         this.drawable = drawable;
         this.color = color;
+    }
+
+    private AHBottomNavigationItem(
+            String title, Drawable drawable, @ColorInt int color,
+            @StringRes int titleRes, @DrawableRes int drawableRes, @ColorRes int colorRes,
+            boolean tintDrawableActive, boolean tintDrawableInactive) {
+        this.title = title;
+        this.drawable = drawable;
+        this.color = color;
+        this.titleRes = titleRes;
+        this.drawableRes = drawableRes;
+        this.colorRes = colorRes;
+        this.tintDrawableActive = tintDrawableActive;
+        this.tintDrawableInactive = tintDrawableInactive;
     }
 
     public String getTitle(Context context) {
@@ -144,5 +167,92 @@ public class AHBottomNavigationItem {
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
         this.drawableRes = 0;
+    }
+
+    public boolean isTintDrawableActive() {
+        return tintDrawableActive;
+    }
+
+    public void setTintDrawableActive(boolean tintDrawableActive) {
+        this.tintDrawableActive = tintDrawableActive;
+    }
+
+    public boolean isTintDrawableInactive() {
+        return tintDrawableInactive;
+    }
+
+    public void setTintDrawableInactive(boolean tintDrawableInactive) {
+        this.tintDrawableInactive = tintDrawableInactive;
+    }
+
+    public static class Builder {
+
+        private String title = "";
+
+        private Drawable drawable;
+
+        private int color = Color.GRAY;
+
+        @StringRes
+        private int titleRes = 0;
+
+        @DrawableRes
+        private int drawableRes = 0;
+
+        @ColorRes
+        private int colorRes = 0;
+
+        private boolean tintDrawableActive = true;
+
+        private boolean tintDrawableInactive = true;
+
+        public Builder(@StringRes int titleRes, @DrawableRes int resource) {
+            this.titleRes = titleRes;
+            this.drawableRes = resource;
+        }
+
+        public Builder(@StringRes int titleRes, Drawable drawable) {
+            this.titleRes = titleRes;
+            this.drawable = drawable;
+        }
+
+        public Builder(String title, @DrawableRes int resource) {
+            this.title = title;
+            this.drawableRes = resource;
+        }
+
+        public Builder(String title, Drawable drawable) {
+            this.title = title;
+            this.drawable = drawable;
+        }
+
+        public Builder setColor(@ColorInt int color) {
+            this.color = color;
+            this.colorRes = 0;
+            return this;
+        }
+
+        public Builder setColorRes(@ColorRes int colorRes) {
+            this.colorRes = colorRes;
+            this.color = 0;
+            return this;
+        }
+
+        public Builder setTintDrawableActive(boolean tintDrawableActive) {
+            this.tintDrawableActive = tintDrawableActive;
+            return this;
+        }
+
+        public Builder setTintDrawableInactive(boolean tintDrawableInactive) {
+            this.tintDrawableInactive = tintDrawableInactive;
+            return this;
+        }
+
+        public AHBottomNavigationItem build() {
+            return new AHBottomNavigationItem(
+                    title, drawable, color,
+                    titleRes, drawableRes, colorRes,
+                    tintDrawableActive, tintDrawableInactive);
+        }
     }
 }
