@@ -13,37 +13,38 @@ import java.util.ArrayList;
  */
 public class DemoAdapter extends RecyclerView.Adapter<DemoAdapter.ViewHolder> {
 
-	private ArrayList<String> mDataset = new ArrayList<>();
+    private ArrayList<String> mDataset = new ArrayList<>();
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
-		public TextView mTextView;
-		public ViewHolder(View v) {
-			super(v);
-			mTextView = (TextView) v.findViewById(R.id.layout_item_demo_title);
-		}
-	}
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView mTextView;
 
-	public DemoAdapter(ArrayList<String> dataset) {
-		mDataset.clear();
-		mDataset.addAll(dataset);
-	}
+        public ViewHolder(View v) {
+            super(v);
+            mTextView = (TextView) v.findViewById(R.id.layout_item_demo_title);
+        }
+    }
 
-	@Override
-	public DemoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_demo, parent, false);
-		ViewHolder vh = new ViewHolder(v);
-		return vh;
-	}
+    public DemoAdapter(ArrayList<String> dataset) {
+        mDataset.clear();
+        mDataset.addAll(dataset);
+    }
 
-	@Override
-	public void onBindViewHolder(ViewHolder holder, int position) {
-		holder.mTextView.setText(mDataset.get(position));
+    @Override
+    public DemoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_demo, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
+    }
 
-	}
+    @Override
+    public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.mTextView.setText(mDataset.get(position));
 
-	@Override
-	public int getItemCount() {
-		return mDataset.size();
-	}
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataset.size();
+    }
 
 }
