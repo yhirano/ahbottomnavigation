@@ -20,8 +20,17 @@ Library to implement the Bottom Navigation component from Material Design guidel
 
 ### Gradle
 ```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:2.0.3'
+    compile 'com.github.yhirano:ahbottomnavigation:2.0.3-p1'
 }
 ```
 ### XML
