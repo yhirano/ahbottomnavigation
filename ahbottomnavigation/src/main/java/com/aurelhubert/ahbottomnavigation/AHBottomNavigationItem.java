@@ -21,6 +21,8 @@ public class AHBottomNavigationItem {
 
     private Drawable drawable;
 
+    private Drawable inactiveDrawable;
+
     private int color = Color.GRAY;
 
     @StringRes
@@ -28,6 +30,9 @@ public class AHBottomNavigationItem {
 
     @DrawableRes
     private int drawableRes = 0;
+
+    @DrawableRes
+    private int inactiveDrawableRes = 0;
 
     @ColorRes
     private int colorRes = 0;
@@ -101,14 +106,23 @@ public class AHBottomNavigationItem {
     }
 
     private AHBottomNavigationItem(
-            String title, Drawable drawable, @ColorInt int color,
-            @StringRes int titleRes, @DrawableRes int drawableRes, @ColorRes int colorRes,
-            boolean tintDrawableActive, boolean tintDrawableInactive) {
+            String title,
+            Drawable drawable,
+            Drawable inactiveDrawable,
+            @ColorInt int color,
+            @StringRes int titleRes,
+            @DrawableRes int drawableRes,
+            @DrawableRes int inactiveDrawableRes,
+            @ColorRes int colorRes,
+            boolean tintDrawableActive,
+            boolean tintDrawableInactive) {
         this.title = title;
         this.drawable = drawable;
+        this.inactiveDrawable = inactiveDrawable;
         this.color = color;
         this.titleRes = titleRes;
         this.drawableRes = drawableRes;
+        this.inactiveDrawableRes = inactiveDrawableRes;
         this.colorRes = colorRes;
         this.tintDrawableActive = tintDrawableActive;
         this.tintDrawableInactive = tintDrawableInactive;
@@ -159,6 +173,17 @@ public class AHBottomNavigationItem {
         return drawable;
     }
 
+    public Drawable getDrawableInactive(Context context) {
+        if (inactiveDrawableRes != 0) {
+            try {
+                return VectorDrawableCompat.create(context.getResources(), inactiveDrawableRes, null);
+            } catch (Resources.NotFoundException e) {
+                return ContextCompat.getDrawable(context, inactiveDrawableRes);
+            }
+        }
+        return inactiveDrawable;
+    }
+
     public void setDrawable(@DrawableRes int drawableRes) {
         this.drawableRes = drawableRes;
         this.drawable = null;
@@ -167,6 +192,16 @@ public class AHBottomNavigationItem {
     public void setDrawable(Drawable drawable) {
         this.drawable = drawable;
         this.drawableRes = 0;
+    }
+
+    public void setInactiveDrawable(@DrawableRes int drawableRes) {
+        this.inactiveDrawableRes = drawableRes;
+        this.inactiveDrawable = null;
+    }
+
+    public void setInactiveDrawable(Drawable drawable) {
+        this.inactiveDrawable = drawable;
+        this.inactiveDrawableRes = 0;
     }
 
     public boolean isTintDrawableActive() {
@@ -191,6 +226,8 @@ public class AHBottomNavigationItem {
 
         private Drawable drawable;
 
+        private Drawable inactiveDrawable;
+
         private int color = Color.GRAY;
 
         @StringRes
@@ -198,6 +235,9 @@ public class AHBottomNavigationItem {
 
         @DrawableRes
         private int drawableRes = 0;
+
+        @DrawableRes
+        private int inactiveDrawableRes = 0;
 
         @ColorRes
         private int colorRes = 0;
@@ -238,6 +278,18 @@ public class AHBottomNavigationItem {
             return this;
         }
 
+        public Builder setInactiveDrawable(@DrawableRes int drawableRes) {
+            this.inactiveDrawableRes = drawableRes;
+            this.inactiveDrawable = null;
+            return this;
+        }
+
+        public Builder setInactiveDrawable(Drawable drawable) {
+            this.inactiveDrawable = drawable;
+            this.inactiveDrawableRes = 0;
+            return this;
+        }
+
         public Builder setTintDrawableActive(boolean tintDrawableActive) {
             this.tintDrawableActive = tintDrawableActive;
             return this;
@@ -250,8 +302,8 @@ public class AHBottomNavigationItem {
 
         public AHBottomNavigationItem build() {
             return new AHBottomNavigationItem(
-                    title, drawable, color,
-                    titleRes, drawableRes, colorRes,
+                    title, drawable, inactiveDrawable, color,
+                    titleRes, drawableRes, inactiveDrawableRes, colorRes,
                     tintDrawableActive, tintDrawableInactive);
         }
     }
