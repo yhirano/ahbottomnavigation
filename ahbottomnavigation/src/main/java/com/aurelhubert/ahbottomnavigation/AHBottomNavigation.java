@@ -92,6 +92,7 @@ public class AHBottomNavigation extends FrameLayout {
     private boolean behaviorTranslationEnabled = true;
     private boolean needHideBottomNavigation = false;
     private boolean hideBottomNavigationWithAnimation = false;
+    private boolean soundEffectsEnabled = true;
 
     // Variables (Styles)
     private Typeface titleTypeface;
@@ -141,6 +142,12 @@ public class AHBottomNavigation extends FrameLayout {
     public AHBottomNavigation(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
+    }
+
+    @Override
+    public void setSoundEffectsEnabled(final boolean soundEffectsEnabled) {
+        super.setSoundEffectsEnabled(soundEffectsEnabled);
+        this.soundEffectsEnabled = soundEffectsEnabled;
     }
 
     @Override
@@ -464,6 +471,7 @@ public class AHBottomNavigation extends FrameLayout {
                     updateItems(itemIndex, true);
                 }
             });
+            view.setSoundEffectsEnabled(soundEffectsEnabled);
 
             LayoutParams params = new LayoutParams((int) itemWidth, (int) height);
             linearLayout.addView(view, params);
@@ -600,6 +608,7 @@ public class AHBottomNavigation extends FrameLayout {
                     updateSmallItems(itemIndex, true);
                 }
             });
+            view.setSoundEffectsEnabled(soundEffectsEnabled);
 
             int width = i == currentItem ? (int) selectedItemWidth :
                     (int) itemWidth;
@@ -1142,7 +1151,7 @@ public class AHBottomNavigation extends FrameLayout {
     }
 
     /**
-     * Set title text size
+     * Set title text size in pixels
      *
      * @param activeSize
      * @param inactiveSize
@@ -1150,6 +1159,18 @@ public class AHBottomNavigation extends FrameLayout {
     public void setTitleTextSize(float activeSize, float inactiveSize) {
         this.titleActiveTextSize = activeSize;
         this.titleInactiveTextSize = inactiveSize;
+        createItems();
+    }
+
+    /**
+     +	 * Set title text size in SP
+     +	 *
+     +	 +	 * @param activeSize in sp
+     +	 +	 * @param inactiveSize in sp
+     +	 */
+    public void setTitleTextSizeInSp(float activeSize, float inactiveSize) {
+        this.titleActiveTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, activeSize, resources.getDisplayMetrics());
+        this.titleInactiveTextSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, inactiveSize, resources.getDisplayMetrics());
         createItems();
     }
 
